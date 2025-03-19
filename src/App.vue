@@ -1,9 +1,17 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div>
-    <p class="font-bold">hello</p>
+  <div class="app-layout">
+    <RouterView />
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { RouterView } from "vue-router";
+</script>
+
+<style lang="scss" scoped>
+.app-layout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+</style>
