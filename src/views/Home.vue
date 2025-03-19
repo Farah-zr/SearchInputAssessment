@@ -1,11 +1,7 @@
 <template>
   <div class="px-3">
     <div class="my-4 mx-auto w-full max-w-[500px] h-[56px]">
-      <input
-        v-model="searchInput"
-        placeholder="Search..."
-        class="border border-border shadow-sm py-[6px] px-[10px] h-[32px] text-[14px] rounded w-full focus-within:outline-none ring-border focus-within:ring-2"
-      />
+      <SearchInput placeholder="Search..." @update="(text) => (searchInput = text)" />
       <p v-if="searchInput" class="my-1 text-[14px]">
         <span class="font-semibold">{{ filteredAcrticles.length }}</span>
         results found.
@@ -49,6 +45,7 @@ import moment from "moment"
 import { ref, computed, onUpdated } from "vue"
 import { articles } from "../assets/data/articles"
 import ArticleCard from "../components/ArticleCard.vue"
+import SearchInput from "../components/SearchInput.vue"
 
 const searchInput = ref("")
 
