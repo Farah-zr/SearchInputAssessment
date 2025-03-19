@@ -2,7 +2,7 @@
   <div
     class="border border-gray-200 rounded p-[10px] w-[700px] h-[125px] grid gap-y-[2px] shadow hover:shadow-lg"
   >
-    <p class="text-[20px] font-semibold capitalize truncate">
+    <p class="text-[20px] font-semibold truncate">
       <slot name="article-title"></slot>
     </p>
     <p class="text-gray-500 font-semibold text-[12px] italic">

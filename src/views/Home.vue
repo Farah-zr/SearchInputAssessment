@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="my-4 mx-auto w-full max-w-[500px]">
+    <div class="my-4 mx-auto w-full max-w-[500px] h-[56px]">
       <input
         v-model="searchInput"
         placeholder="Search..."
@@ -53,24 +53,33 @@ function highlightText(text) {
 
   const searchTerm = searchInput.value.toLowerCase().trim()
 
-  // split text every search term
-  const parts = text.toLowerCase().split(searchTerm)
+  let startIndex = 0,
+    result = []
 
-  // no keywords found
-  if (parts.length === 1) return [{ text, highlight: false }]
+  while (startIndex < text.length) {
+    const termIndex = text.toLowerCase().indexOf(searchTerm, startIndex)
 
-  return parts
-    .map((part, index, arr) => {
-      if (index < arr.length - 1) {
-        return [
-          { text: part, highlight: false },
-          { text: searchTerm, highlight: true }
-        ]
-      }
+    // if no match
+    if (termIndex === -1) {
+      result.push({ text: text.slice(startIndex), highlight: false })
+      break
+    }
 
-      return [{ text: part, highlight: false }]
+    // if text before search term
+    if (termIndex > startIndex) {
+      result.push({ text: text.slice(startIndex, termIndex), highlight: false })
+    }
+
+    // add search term
+    result.push({
+      text: text.slice(termIndex, termIndex + searchTerm.length),
+      highlight: true
     })
-    .flat()
+
+    startIndex = termIndex + searchTerm.length
+  }
+
+  return result
 }
 </script>
 
