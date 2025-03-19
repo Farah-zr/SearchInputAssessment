@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-white rounded p-[10px] w-[700px] h-[125px] grid gap-y-[2px] shadow hover:shadow-lg"
-  >
+  <div class="bg-white rounded p-[10px] w-full h-[120px] grid gap-y-[2px] shadow hover:shadow-lg">
     <p class="text-[20px] font-semibold truncate">
       <slot name="article-title"></slot>
     </p>

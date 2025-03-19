@@ -1,44 +1,54 @@
 <template>
-  <div>
+  <div class="px-3">
     <div class="my-4 mx-auto w-full max-w-[500px] h-[56px]">
       <input
         v-model="searchInput"
         placeholder="Search..."
         class="border border-border shadow-sm py-[6px] px-[10px] h-[32px] text-[14px] rounded w-full focus-within:outline-none ring-border focus-within:ring-2"
       />
-      <p v-if="searchInput" class="my-1 tet-[12px]">
+      <p v-if="searchInput" class="my-1 text-[14px]">
         <span class="font-semibold">{{ filteredAcrticles.length }}</span>
         results found.
       </p>
     </div>
 
-    <div class="flex flex-col justify-center items-center gap-4">
-      <template v-for="(article, index) in filteredAcrticles" :key="index">
-        <ArticleCard>
-          <template #article-title>
-            <template v-for="(part, i) in highlightText(article.title)" :key="i">
-              <span :class="{ highlight: part.highlight }">{{ part.text }}</span>
+    <div class="flex justify-center items-center w-full">
+      <div class="cards-wrapper grid gap-4 w-full md:w-[700px]">
+        <template v-for="(article, index) in filteredAcrticles" :key="index">
+          <ArticleCard>
+            <template #article-title>
+              <template v-for="(part, i) in highlightText(article.title)" :key="i">
+                <span :class="{ highlight: part.highlight }">{{ part.text }}</span>
+              </template>
             </template>
-          </template>
-          <template #article-date>
-            <span>{{ moment(article.date).format("MMM DD, YYYY") }}</span>
-          </template>
-          <template #article-body>
-            <template v-for="(part, i) in highlightText(article.body)" :key="i">
-              <span :class="{ highlight: part.highlight }">{{ part.text }}</span>
+
+            <template #article-date>
+              <span>{{ moment(article.date).format("MMM DD, YYYY") }}</span>
             </template>
-          </template>
-        </ArticleCard>
-      </template>
+
+            <template #article-body>
+              <template v-for="(part, i) in highlightText(article.body)" :key="i">
+                <span :class="{ highlight: part.highlight }">{{ part.text }}</span>
+              </template>
+            </template>
+          </ArticleCard>
+        </template>
+      </div>
     </div>
   </div>
 </template>
 
+<style lang="scss" scoped>
+.highlight {
+  background-color: var(--highlight);
+}
+</style>
+
 <script setup>
+import moment from "moment"
 import { ref, computed, onUpdated } from "vue"
 import { articles } from "../assets/data/articles"
 import ArticleCard from "../components/ArticleCard.vue"
-import moment from "moment"
 
 const searchInput = ref("")
 
@@ -85,9 +95,3 @@ function highlightText(text) {
   return result
 }
 </script>
-
-<style scoped>
-.highlight {
-  background-color: var(--highlight);
-}
-</style>
