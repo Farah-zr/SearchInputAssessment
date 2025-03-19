@@ -4,9 +4,12 @@
       <input
         v-model="searchInput"
         placeholder="Search..."
-        class="border py-[6px] px-[10px] h-[32px] text-[14px] rounded w-full"
+        class="border border-border shadow-sm py-[6px] px-[10px] h-[32px] text-[14px] rounded w-full focus-within:outline-none ring-border focus-within:ring-2"
       />
-      <p v-if="searchInput" class="font-bold tet-[12px]">{{ filteredAcrticles.length }} found</p>
+      <p v-if="searchInput" class="my-1 tet-[12px]">
+        <span class="font-semibold">{{ filteredAcrticles.length }}</span>
+        results found.
+      </p>
     </div>
 
     <div class="flex flex-col justify-center items-center gap-4">
@@ -85,6 +88,6 @@ function highlightText(text) {
 
 <style scoped>
 .highlight {
-  background-color: yellow;
+  background-color: var(--highlight);
 }
 </style>
